@@ -1,0 +1,30 @@
+# Built files
+/build/
+.gradle/
+.cxx/
+.externalNativeBuild/
+captures/
+
+# Local configuration
+local.properties
+
+# IntelliJ IDEA / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.idea/misc.xml
+.idea/deploymentTargetDropDown.xml
+.idea/render.experimental.xml
+
+# macOS system files
+.DS_Store
+
+# Others
+*.log
