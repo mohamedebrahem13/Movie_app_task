@@ -25,6 +25,8 @@ local.properties
 
 # macOS system files
 .DS_Store
+secrets.properties
+
 
 # Others
 *.log

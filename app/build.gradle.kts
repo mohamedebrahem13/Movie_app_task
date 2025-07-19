@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+import java.util.Properties
+import kotlin.apply
 
 plugins {
     alias(libs.plugins.android.application)
@@ -7,7 +9,25 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.kotlin.serialization)
+
+
 }
+
+fun getSecret(key: String): String {
+    val secretsProps = File(rootDir, "app/secrets.properties")
+    if (!secretsProps.exists()) {
+        throw GradleException("Missing secrets.properties file at app/secrets.properties")
+    }
+
+    val props = Properties().apply {
+        load(secretsProps.inputStream())
+    }
+
+    return props[key]?.toString()
+        ?: throw GradleException("Missing required secret key: $key in secrets.properties")
+}
+
 
 android {
     namespace = "com.movie_app_task"
@@ -21,6 +41,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", "\"${getSecret("API_KEY")}\"")
+        buildConfigField("String", "ACCESS_TOKEN", "\"${getSecret("ACCESS_TOKEN")}\"")
     }
 
     buildTypes {
@@ -42,6 +64,7 @@ android {
         }
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
@@ -74,6 +97,8 @@ dependencies {
 
     //coil
     implementation(libs.coil.compose)
+    implementation(libs.coil.kt.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     //serialization
     implementation(libs.kotlinx.serialization.json)
