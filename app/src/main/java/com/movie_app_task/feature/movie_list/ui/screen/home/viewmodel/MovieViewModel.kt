@@ -32,7 +32,7 @@ class MovieViewModel @Inject constructor(
         when (action) {
             is MovieContract.MovieAction.LoadMovies -> loadMovies()
             is MovieContract.MovieAction.OnMovieClick -> {
-                sendEvent(Navigate(action.movieId))
+                sendEvent(Navigate(action.movieId, action.movieTitle))
             }
 
             is MovieContract.MovieAction.OnPermissionResult -> handlePermissionResult(action.granted)

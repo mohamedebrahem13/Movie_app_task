@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.movie_app_task.R
@@ -39,7 +40,7 @@ fun HomeHeader(
             modifier = Modifier.fillMaxWidth(),
             value = value,
             onValueChange = onValueChange,
-            placeholder = { Text(text = "Search...") },
+            placeholder = { Text(text = stringResource(R.string.search)) },
             shape = RoundedCornerShape(20.dp),
             singleLine = true,
             colors = TextFieldDefaults.colors(
@@ -52,7 +53,7 @@ fun HomeHeader(
             ), leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = "Search Icon",
+                    contentDescription = stringResource(R.string.search_icon),
                     tint = Color.Gray,
                     modifier = Modifier.clickable { onSearchClick(value) }
                 )
@@ -60,7 +61,7 @@ fun HomeHeader(
             trailingIcon = {
                 Icon(
                     painter = endIcon,
-                    contentDescription = "End Icon",
+                    contentDescription = stringResource(R.string.end_icon),
                     modifier = Modifier.clickable(onClick = onEndIconClick),
                     tint = Color.Gray
                 )

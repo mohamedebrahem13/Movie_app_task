@@ -17,6 +17,7 @@ class MovieDetailsViewModel @Inject constructor(
     override fun onActionTrigger(action: Action?) {
         when (action) {
             is Action.LoadMovieDetails -> loadMovieDetails(action.movieId)
+            is Action.OnBackClicked -> sendEvent(Event.NavigateBack)
             else -> Unit
         }
     }

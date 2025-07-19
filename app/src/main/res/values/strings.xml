@@ -23,4 +23,14 @@
     <string name="unknown_error">Unknown error</string>
     <string name="voice_permission_granted">Voice permission granted</string>
     <string name="voice_permission_denied">Voice permission denied</string>
+    <string name="back">Back</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="search">Search…</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="end_icon">End Icon</string>
+    <string name="the_flash">The Flash</string>
+    <string name="https_m_media_amazon_com_images_m_mv5bzdu4mgexzgetmwrlmc00njrhlthhzgqtmgixmdflnje5mwvlxkeyxkfqcgc_v1_ql75_ux169_jpg">https://m.media-amazon.com/images/M/MV5BZDU4MGExZGEtMWRlMC00NjRhLThhZGQtMGIxMDFlNjE5MWVlXkEyXkFqcGc@._V1_QL75_UX169_.jpg</string>
+    <string name="_2023_06_13">2023–06–13</string>
+    <string name="rating_star">Rating Star</string>
+    <string name="speech_recognition_not_available_on_this_device">Speech recognition not available on this device</string>
 </resources>

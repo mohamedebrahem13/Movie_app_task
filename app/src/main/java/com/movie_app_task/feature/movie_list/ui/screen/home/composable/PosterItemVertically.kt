@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -82,10 +83,10 @@ private fun PreviewPosterItemVertically() {
     PosterItemVertically(
         movie = Movie(
             id = 1,
-            title = "The Flash",
-            posterPath = "https://m.media-amazon.com/images/M/MV5BZDU4MGExZGEtMWRlMC00NjRhLThhZGQtMGIxMDFlNjE5MWVlXkEyXkFqcGc@._V1_QL75_UX169_.jpg",
+            title = stringResource(R.string.the_flash),
+            posterPath = stringResource(R.string.https_m_media_amazon_com_images_m_mv5bzdu4mgexzgetmwrlmc00njrhlthhzgqtmgixmdflnje5mwvlxkeyxkfqcgc_v1_ql75_ux169_jpg),
             voteAverage = 7.5,
-            releaseDate = "2023-06-13",
+            releaseDate = stringResource(R.string._2023_06_13),
         ),
         modifier = Modifier.width(156.dp)
     )

@@ -19,7 +19,7 @@ class VoiceSearchHelper(
 
     fun startListening() {
         if (!SpeechRecognizer.isRecognitionAvailable(context)) {
-            onError?.invoke("Speech recognition not available on this device")
+            onError?.invoke(context.getString(R.string.speech_recognition_not_available_on_this_device))
             return
         }
 
