@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.movie_app_task.feature.detiles.ui.DetailsScreen
 import com.movie_app_task.feature.movie_list.ui.screen.home.HomeScreen
-import com.movie_app_task.ui.theme.MovieAppTaskTheme
+import com.movie_app_task.android.theme.MovieAppTaskTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 
@@ -38,13 +38,17 @@ fun AppNavHost() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Destination.Home) {
         composable<Destination.Home> {
-            HomeScreen(onMovieClick = { movie ->
-                navController.navigate(Destination.Details(movie))
+            HomeScreen(onMovieClick = { movieId,title ->
+                navController.navigate(Destination.Details(movieId, title))
             })
         }
         composable<Destination.Details> { backStackEntry ->
             val details = backStackEntry.toRoute<Destination.Details>()
-            DetailsScreen(movieId = details.movieId)
+            DetailsScreen(
+                movieId = details.movieId,
+                title = details.movieTitle,
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }
@@ -55,5 +59,5 @@ sealed class Destination {
     data object Home : Destination()
 
     @Serializable
-    data class Details(val movieId: Int) : Destination()
+    data class Details(val movieId: Int, val movieTitle: String) : Destination()
 }

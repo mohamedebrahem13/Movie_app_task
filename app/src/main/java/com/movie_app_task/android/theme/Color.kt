@@ -1,4 +1,4 @@
-package com.movie_app_task.ui.theme
+package com.movie_app_task.android.theme
 
 import androidx.compose.ui.graphics.Color
 

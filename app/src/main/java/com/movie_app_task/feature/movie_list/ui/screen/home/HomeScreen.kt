@@ -39,7 +39,7 @@ import com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel.MovieViewM
 @Composable
 fun HomeScreen(
     viewModel: MovieViewModel = hiltViewModel(),
-    onMovieClick: (Int) -> Unit
+    onMovieClick: (Int,String) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -94,7 +94,7 @@ fun HomeScreen(
     LaunchedEffect(viewModel.singleEvent) {
         viewModel.singleEvent.collect { event ->
             when (event) {
-                is MovieContract.MovieEvent.Navigate -> onMovieClick(event.movieId)
+                is MovieContract.MovieEvent.Navigate -> onMovieClick(event.movieId, event.movieTitle)
                 is MovieContract.MovieEvent.ShowError -> { /* Handle error if needed */ }
             }
         }
@@ -114,8 +114,8 @@ fun HomeScreen(
         onVoiceClick = {
             viewModel.processIntent(MovieContract.MovieAction.OnVoiceSearchClick)
         },
-        onMovieClick = { movieId ->
-            viewModel.processIntent(MovieContract.MovieAction.OnMovieClick(movieId))
+        onMovieClick = { movieId,movieTitle ->
+            viewModel.processIntent(MovieContract.MovieAction.OnMovieClick(movieId,movieTitle))
         }
     )
 }
@@ -126,7 +126,7 @@ fun HomeScreenContent(
     onSearchTextChange: (String) -> Unit,
     onSearchClick: (String) -> Unit,
     onVoiceClick: () -> Unit,
-    onMovieClick: (Int) -> Unit,
+    onMovieClick: (Int,String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -177,7 +177,7 @@ fun HomeScreenContent(
 @Composable
 fun MovieList(
     movies: List<Movie>,
-    onMovieClick: (Int) -> Unit
+    onMovieClick: (Int,String) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -192,7 +192,7 @@ fun MovieList(
                 movie = movie,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                onMovieClick(movie.id)
+                onMovieClick(movie.id, movie.title)
             }
         }
     }

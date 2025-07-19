@@ -7,7 +7,7 @@ interface MovieContract {
 
     sealed class MovieAction {
         object LoadMovies : MovieAction()
-        data class OnMovieClick(val movieId: Int) : MovieAction()
+        data class OnMovieClick(val movieId: Int, val movieTitle: String) : MovieAction()
 
         object OnVoiceSearchClick : MovieAction()
 
@@ -18,7 +18,7 @@ interface MovieContract {
 
     sealed class MovieEvent {
         data class ShowError(val error: MovieDomainException) : MovieEvent()
-        data class Navigate(val movieId: Int) : MovieEvent()
+        data class Navigate(val movieId: Int, val movieTitle: String) : MovieEvent()
     }
 
     data class MovieState(
