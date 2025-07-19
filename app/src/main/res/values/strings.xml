@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">Movie app task</string>
+    <!-- Movie Details -->
+    <string name="rating_format">Rating: %1$.1f ⭐ (%2$d votes)</string>
+    <string name="release_date_format">Release Date: %1$s</string>
+    <string name="original_title_format">Original Title: %1$s</string>
+    <string name="language_format">Language: %1$s</string>
+    <string name="popularity_format">Popularity: %1$.1f</string>
+
+    <!-- Flags -->
+    <string name="_18_adult_content">18+ (Adult Content)</string>
+    <string name="all_ages">All Ages</string>
+    <string name="video_available">Video Available</string>
+    <string name="no_video">No Video</string>
+    <string name="audio_recording_error">Audio recording error</string>
+    <string name="client_side_error">Client side error</string>
+    <string name="insufficient_permissions">Insufficient permissions</string>
+    <string name="network_timeout">Network timeout</string>
+    <string name="network_error">Network error</string>
+    <string name="no_match_found">No match found</string>
+    <string name="speech_recognizer_is_busy">Speech recognizer is busy</string>
+    <string name="server_error">Server error</string>
+    <string name="no_speech_input">No speech input</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="voice_permission_granted">Voice permission granted</string>
+    <string name="voice_permission_denied">Voice permission denied</string>
 </resources>
