@@ -11,4 +11,10 @@ interface MoviesApiService {
     suspend fun getPopularMovies(
         @Query("page") page: Int = 1
     ): MoviesResponseDto
+
+    @GET(Constants.SEARCH_MOVIE_ENDPOINT)
+    suspend fun searchMoviesByQuery(
+        @Query("query") query: String,
+        @Query("page") page: Int = 1
+    ): MoviesResponseDto
 }

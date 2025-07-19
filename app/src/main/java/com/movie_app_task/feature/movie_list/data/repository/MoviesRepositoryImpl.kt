@@ -31,11 +31,24 @@ class MoviesRepositoryImpl(
         }
     }
 
-    override fun searchMoviesByName(query: String): Flow<List<Movie>> {
+    override fun searchMoviesByNameLocal(query: String): Flow<List<Movie>> {
         return safeFlow {
             moviesLocalDataSource.searchMoviesByName(query)
         }.map { entities ->
             MoviesMapper.entityToDomain(entities)
+        }
+    }
+
+    override suspend fun searchMoviesByNameRemote(
+        query: String,
+        page: Int
+    ): List<Movie> {
+        return safeCall {
+            val response = moviesRemoteDataSource.searchMoviesByQuery(query, page)
+            val domainMovies = MoviesMapper.dtoToDomain(response)
+            val entities = MoviesMapper.dtoListToEntityList(response.results ?: emptyList())
+            moviesLocalDataSource.insertMovies(entities)
+            domainMovies
         }
     }
 }

@@ -5,7 +5,8 @@ import com.movie_app_task.common.domain.utils.Resource
 import com.movie_app_task.common.ui.BaseMovieViewModel
 import com.movie_app_task.feature.movie_list.domain.usecase.GetPopularMoviesLocalUseCase
 import com.movie_app_task.feature.movie_list.domain.usecase.GetPopularMoviesRemoteUseCase
-import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameUseCase
+import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameRemoteUseCase
+import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameLocalUseCase
 import com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel.MovieContract.MovieEvent.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -17,7 +18,8 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val getPopularMoviesRemoteUseCase: GetPopularMoviesRemoteUseCase,
     private val getPopularMoviesLocalUseCase: GetPopularMoviesLocalUseCase,
-    private val searchMoviesByNameUseCase: SearchMoviesByNameUseCase
+    private val searchMoviesByNameLocalUseCase: SearchMoviesByNameLocalUseCase,
+    private val searchMoviesByNameRemoteUseCase: SearchMoviesByNameRemoteUseCase
 ) : BaseMovieViewModel<MovieContract.MovieAction, MovieContract.MovieEvent, MovieContract.MovieState>(
     MovieContract.MovieState()
 ) {
@@ -95,7 +97,7 @@ class MovieViewModel @Inject constructor(
     }
 
     private fun onSearchQueryChange(query: String) {
-        setState(currentState.copy(searchQuery = query))
+        setState(currentState.copy(searchQuery = query, isLoading = true, error = null))
         debounceJob?.cancel()
 
         if (query.isBlank()) {
@@ -107,17 +109,50 @@ class MovieViewModel @Inject constructor(
         debounceJob = viewModelScope.launch {
             delay(1500)
 
-            searchMoviesByNameUseCase(query).collect { result ->
+            searchMoviesByNameLocalUseCase(query).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        setState(
-                            currentState.copy(
-                                movies = result.model,
-                                isLoading = false,
-                                error = null
+                        val localResults = result.model
+
+                        if (localResults.isNotEmpty()) {
+                            setState(
+                                currentState.copy(
+                                    movies = localResults,
+                                    isLoading = false,
+                                    error = null,
+                                    isFromLocal = true
+                                )
                             )
-                        )
+                        } else {
+
+                            setState(currentState.copy(isLoading = true, isFromLocal = false))
+
+                            searchMoviesByNameRemoteUseCase(query).collect { remoteResult ->
+                                when (remoteResult) {
+                                    is Resource.Success -> {
+                                        setState(
+                                            currentState.copy(
+                                                movies = remoteResult.model,
+                                                isLoading = false,
+                                                error = null,
+                                                isFromLocal = false
+                                            )
+                                        )
+                                    }
+
+                                    is Resource.Failure -> {
+                                        setState(
+                                            currentState.copy(
+                                                error = remoteResult.exception,
+                                                isLoading = false
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
+
                     is Resource.Failure -> {
                         setState(
                             currentState.copy(

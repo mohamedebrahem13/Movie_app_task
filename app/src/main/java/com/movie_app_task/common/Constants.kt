@@ -6,4 +6,5 @@ object Constants {
     const val MOVIE_DATABASE_NAME = "movie_database"
     const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
 
+    const val SEARCH_MOVIE_ENDPOINT = "search/movie"
 }

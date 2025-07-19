@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-class SearchMoviesByNameUseCase(
+class SearchMoviesByNameLocalUseCase(
     private val repository: MoviesRepository
 ) {
     operator fun invoke(query: String): Flow<Resource<List<Movie>>> = flow {
         try {
-            repository.searchMoviesByName(query).collect { movies ->
+            repository.searchMoviesByNameLocal(query).collect { movies ->
                 emit(Resource.Success(movies))
             }
         } catch (e: Exception) {
