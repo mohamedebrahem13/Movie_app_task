@@ -1,12 +1,14 @@
 package com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel
 
 import androidx.lifecycle.viewModelScope
+import com.movie_app_task.common.domain.utils.InvalidSearchQueryException
 import com.movie_app_task.common.domain.utils.Resource
 import com.movie_app_task.common.ui.BaseMovieViewModel
 import com.movie_app_task.feature.movie_list.domain.usecase.GetPopularMoviesLocalUseCase
 import com.movie_app_task.feature.movie_list.domain.usecase.GetPopularMoviesRemoteUseCase
 import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameRemoteUseCase
 import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameLocalUseCase
+import com.movie_app_task.feature.movie_list.domain.usecase.ValidateSearchQueryUseCase
 import com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel.MovieContract.MovieEvent.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -19,7 +21,8 @@ class MovieViewModel @Inject constructor(
     private val getPopularMoviesRemoteUseCase: GetPopularMoviesRemoteUseCase,
     private val getPopularMoviesLocalUseCase: GetPopularMoviesLocalUseCase,
     private val searchMoviesByNameLocalUseCase: SearchMoviesByNameLocalUseCase,
-    private val searchMoviesByNameRemoteUseCase: SearchMoviesByNameRemoteUseCase
+    private val searchMoviesByNameRemoteUseCase: SearchMoviesByNameRemoteUseCase,
+    private val validateSearchQueryUseCase: ValidateSearchQueryUseCase
 ) : BaseMovieViewModel<MovieContract.MovieAction, MovieContract.MovieEvent, MovieContract.MovieState>(
     MovieContract.MovieState()
 ) {
@@ -103,6 +106,17 @@ class MovieViewModel @Inject constructor(
         if (query.isBlank()) {
             debounceJob = null
             loadMovies()
+            return
+        }
+        try {
+            validateSearchQueryUseCase(query)
+        } catch (e: InvalidSearchQueryException) {
+            setState(
+                currentState.copy(
+                    isLoading = false,
+                    error = e
+                )
+            )
             return
         }
 

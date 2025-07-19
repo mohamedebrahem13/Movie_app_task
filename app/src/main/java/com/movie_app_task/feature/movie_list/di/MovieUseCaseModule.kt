@@ -4,6 +4,7 @@ import com.movie_app_task.feature.movie_list.domain.usecase.GetPopularMoviesLoca
 import com.movie_app_task.feature.movie_list.domain.usecase.GetPopularMoviesRemoteUseCase
 import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameRemoteUseCase
 import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameLocalUseCase
+import com.movie_app_task.feature.movie_list.domain.usecase.ValidateSearchQueryUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +30,7 @@ object MovieUseCaseModule {
     fun provideSearchMoviesByNameRemoteUseCase(
         moviesRepository: MoviesRepository
     ): SearchMoviesByNameRemoteUseCase = SearchMoviesByNameRemoteUseCase(moviesRepository)
-
+    @Provides
+    fun provideValidateSearchQueryUseCase(): ValidateSearchQueryUseCase = ValidateSearchQueryUseCase()
 
 }
