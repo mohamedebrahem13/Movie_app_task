@@ -7,3 +7,4 @@ class ServerErrorException(message: String? = null) : MovieDomainException(messa
 class UserNotAuthenticatedException(message: String? = null) : MovieDomainException(message)
 class UnknownException(message: String? = null) : MovieDomainException(message)
 class DataReadWriteException(message: String? = null) : MovieDomainException(message)
+class InvalidSearchQueryException(message: String?= null) : MovieDomainException(message)

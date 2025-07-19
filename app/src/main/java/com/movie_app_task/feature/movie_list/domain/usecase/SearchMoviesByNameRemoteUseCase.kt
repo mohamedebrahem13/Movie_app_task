@@ -8,19 +8,17 @@ import com.movie_app_task.feature.movie_list.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-
-class SearchMoviesByNameUseCase(
-    private val repository: MoviesRepository
+class SearchMoviesByNameRemoteUseCase(
+    private val moviesRepository: MoviesRepository
 ) {
-    operator fun invoke(query: String): Flow<Resource<List<Movie>>> = flow {
+    operator fun invoke(query: String, page: Int = 1): Flow<Resource<List<Movie>>> = flow {
         try {
-            repository.searchMoviesByName(query).collect { movies ->
-                emit(Resource.Success(movies))
-            }
+            val remoteMovies = moviesRepository.searchMoviesByNameRemote(query, page)
+            emit(Resource.Success(remoteMovies))
         } catch (e: Exception) {
             val domainException = when (e) {
                 is MovieDomainException -> e
-                else -> UnknownException(e.message ?: "Unknown error during search")
+                else -> UnknownException(e.message ?: "Unknown error")
             }
             emit(Resource.Failure(domainException))
         }

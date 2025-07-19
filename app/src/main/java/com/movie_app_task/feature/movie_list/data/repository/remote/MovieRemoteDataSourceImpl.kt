@@ -7,7 +7,13 @@ import com.movie_app_task.feature.movie_list.domain.repository.remote.MovieRemot
 class MovieRemoteDataSourceImpl(
     private val apiService: MoviesApiService
 ) : MovieRemoteDataSource {
-    override suspend fun getPopularMovies(page: Int): MoviesResponseDto {
-        return apiService.getPopularMovies(page)
-    }
+    override suspend fun getPopularMovies(page: Int): MoviesResponseDto =
+        apiService.getPopularMovies(page)
+
+
+    override suspend fun searchMoviesByQuery(
+        query: String,
+        page: Int
+    ): MoviesResponseDto = apiService.searchMoviesByQuery(page = page, query = query)
+
 }

@@ -17,7 +17,7 @@ import org.junit.Test
 class SearchMoviesByNameUseCaseTest {
 
     private lateinit var repository: MoviesRepository
-    private lateinit var useCase: SearchMoviesByNameUseCase
+    private lateinit var useCase: SearchMoviesByNameLocalUseCase
 
     private val fakeMovies = listOf(
         Movie(id = 1, title = "Inception", posterPath = "path1", releaseDate = "2010", voteAverage = 8.8),
@@ -27,14 +27,14 @@ class SearchMoviesByNameUseCaseTest {
     @Before
     fun setup() {
         repository = mockk()
-        useCase = SearchMoviesByNameUseCase(repository)
+        useCase = SearchMoviesByNameLocalUseCase(repository)
     }
 
     @Test
     fun `invoke returns success when repository emits movies`() = runTest {
         // Given
         val query = "In"
-        coEvery { repository.searchMoviesByName(query) } returns flowOf(fakeMovies)
+        coEvery { repository.searchMoviesByNameLocal(query) } returns flowOf(fakeMovies)
 
         // When + Then
         useCase(query).test {
@@ -49,7 +49,7 @@ class SearchMoviesByNameUseCaseTest {
     fun `invoke returns failure when repository throws exception`() = runTest {
         // Given
         val query = "In"
-        coEvery { repository.searchMoviesByName(query) } throws RuntimeException("Something went wrong")
+        coEvery { repository.searchMoviesByNameLocal(query) } throws RuntimeException("Something went wrong")
 
         // When + Then
         useCase(query).test {

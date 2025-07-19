@@ -27,6 +27,8 @@ interface MovieContract {
         val error: MovieDomainException? = null,
         val isVoiceRecording: Boolean = false,
         val isPermissionGranted: Boolean = false,
-        val searchQuery: String = ""
+        val searchQuery: String = "",
+        val isFromLocal: Boolean = false
+
     )
 }

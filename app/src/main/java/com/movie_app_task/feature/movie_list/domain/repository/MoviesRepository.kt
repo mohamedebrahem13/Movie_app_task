@@ -6,5 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface MoviesRepository {
     fun getPopularMoviesLocal(): Flow<List<Movie>>
     suspend fun getPopularMoviesRemote(page: Int= 1): List<Movie>
-    fun searchMoviesByName(query: String): Flow<List<Movie>>
+    fun searchMoviesByNameLocal(query: String): Flow<List<Movie>>
+    suspend fun searchMoviesByNameRemote(query: String, page: Int = 1): List<Movie>
+
 }
