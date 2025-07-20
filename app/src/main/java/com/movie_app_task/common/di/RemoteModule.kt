@@ -9,7 +9,7 @@ import com.movie_app_task.common.data.repository.remote.MoviesApiService
 import com.movie_app_task.common.data.repository.remote.RetrofitNetworkProvider
 import com.movie_app_task.common.data.repository.remote.converter.ExceptionConverter
 import com.movie_app_task.common.data.repository.remote.converter.IExceptionConverter
-import com.movie_app_task.common.domain.remote.INetworkProvider
+import com.movie_app_task.common.domain.repository.remote.INetworkProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +24,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object RemoteModule {
 
     @Provides
     @Singleton

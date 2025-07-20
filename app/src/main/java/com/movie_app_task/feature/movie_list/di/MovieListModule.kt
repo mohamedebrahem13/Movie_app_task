@@ -3,7 +3,7 @@ package com.movie_app_task.feature.movie_list.di
 import com.movie_app_task.feature.movie_list.data.repository.local.MovieLocalDataSourceImpl
 import com.movie_app_task.common.data.repository.local.db.MovieDao
 import com.movie_app_task.feature.movie_list.data.repository.remote.MovieRemoteDataSourceImpl
-import com.movie_app_task.common.domain.remote.INetworkProvider
+import com.movie_app_task.common.domain.repository.remote.INetworkProvider
 import com.movie_app_task.feature.movie_list.data.repository.MoviesRepositoryImpl
 import com.movie_app_task.feature.movie_list.domain.repository.MoviesRepository
 import com.movie_app_task.feature.movie_list.domain.repository.local.MovieLocalDataSource
