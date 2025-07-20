@@ -6,7 +6,6 @@ import com.movie_app_task.feature.movie_list.domain.models.Movie
 interface MovieContract {
 
     sealed class MovieAction {
-        object LoadMovies : MovieAction()
         data class OnMovieClick(val movieId: Int, val movieTitle: String) : MovieAction()
 
         object OnVoiceSearchClick : MovieAction()
