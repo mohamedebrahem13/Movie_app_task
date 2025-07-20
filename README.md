@@ -10,14 +10,11 @@ An Android application that displays a list of popular movies and allows users t
 
 Click to watch short previews of the app in action:
 
-https://github.com/user-attachments/assets/f1ccddc9-15a6-459b-bafc-a01cbaeccd50)](https://github.com/user-attachments/assets/f1ccddc9-15a6-459b-bafc-a01cbaeccd50)  
-**Home Screen**
-
-https://github.com/user-attachments/assets/73be492f-9de9-431a-aa98-e3c892df3b68)](https://github.com/user-attachments/assets/73be492f-9de9-431a-aa98-e3c892df3b68)  
-**Voice Search**
-
-https://github.com/user-attachments/assets/bd5b2e2b-f458-4c16-804c-291d1e1e8369)](https://github.com/user-attachments/assets/bd5b2e2b-f458-4c16-804c-291d1e1e8369)  
-**Movie Details**
+- https://github.com/user-attachments/assets/cb1b99f2-70c2-43b6-ad8a-06cbe765ee69
+  
+- https://github.com/user-attachments/assets/a901c9d6-c9ff-4c34-9ac9-81aa933404ab
+  
+- https://github.com/user-attachments/assets/3a221dda-b5ea-44b6-82fb-d46df215a533
 
 ---
 ## Technologies Used
