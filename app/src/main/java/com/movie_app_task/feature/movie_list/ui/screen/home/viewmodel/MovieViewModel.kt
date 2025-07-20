@@ -11,6 +11,7 @@ import com.movie_app_task.feature.movie_list.domain.usecase.SearchMoviesByNameLo
 import com.movie_app_task.feature.movie_list.domain.usecase.ValidateSearchQueryUseCase
 import com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel.MovieContract.MovieEvent.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -47,7 +48,8 @@ class MovieViewModel @Inject constructor(
         viewModelScope.launch {
             setState(currentState.copy(isLoading = true, error = null))
 
-            launch {
+            // Fetch local movies first
+            launch(Dispatchers.IO) {
                 getPopularMoviesLocalUseCase().collect { localResult ->
                     when (localResult) {
                         is Resource.Success -> {
@@ -55,16 +57,19 @@ class MovieViewModel @Inject constructor(
                                 currentState.copy(
                                     movies = localResult.model,
                                     isLoading = false,
-                                    error = null
+                                    error = null,
+                                    isFromLocal = true
                                 )
                             )
                         }
 
                         is Resource.Failure -> {
+                            // If local fails, still try remote
                             setState(
                                 currentState.copy(
+                                    isLoading = false,
                                     error = localResult.exception,
-                                    isLoading = false
+                                    isFromLocal = true
                                 )
                             )
                         }
@@ -72,7 +77,8 @@ class MovieViewModel @Inject constructor(
                 }
             }
 
-            launch {
+            // Fetch remote in parallel
+            launch(Dispatchers.IO) {
                 getPopularMoviesRemoteUseCase().collect { remoteResult ->
                     when (remoteResult) {
                         is Resource.Success -> {
@@ -80,25 +86,21 @@ class MovieViewModel @Inject constructor(
                                 currentState.copy(
                                     movies = remoteResult.model,
                                     isLoading = false,
-                                    error = null
+                                    error = null,
+                                    isFromLocal = false
                                 )
                             )
                         }
 
                         is Resource.Failure -> {
-                            setState(
-                                currentState.copy(
-                                    error = remoteResult.exception,
-                                    isLoading = false
-                                )
-                            )
+                            sendEvent(ShowError(remoteResult.exception))
+                            setState(currentState.copy(isLoading = false))
                         }
                     }
                 }
             }
         }
     }
-
     private fun onSearchQueryChange(query: String) {
         setState(currentState.copy(searchQuery = query, isLoading = true, error = null))
         debounceJob?.cancel()
