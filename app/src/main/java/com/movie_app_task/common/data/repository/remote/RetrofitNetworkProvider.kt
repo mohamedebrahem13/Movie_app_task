@@ -1,7 +1,7 @@
 package com.movie_app_task.common.data.repository.remote
 
 import com.movie_app_task.common.data.utils.getModelFromJSON
-import com.movie_app_task.common.domain.remote.INetworkProvider
+import com.movie_app_task.common.domain.repository.remote.INetworkProvider
 import java.lang.reflect.Type
 
 class RetrofitNetworkProvider (

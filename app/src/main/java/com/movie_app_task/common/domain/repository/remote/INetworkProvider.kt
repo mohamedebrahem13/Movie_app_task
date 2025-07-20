@@ -1,4 +1,4 @@
-package com.movie_app_task.common.domain.remote
+package com.movie_app_task.common.domain.repository.remote
 
 import java.lang.reflect.Type
 
