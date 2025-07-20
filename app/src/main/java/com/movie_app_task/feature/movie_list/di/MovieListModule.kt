@@ -3,7 +3,7 @@ package com.movie_app_task.feature.movie_list.di
 import com.movie_app_task.feature.movie_list.data.repository.local.MovieLocalDataSourceImpl
 import com.movie_app_task.common.data.repository.local.db.MovieDao
 import com.movie_app_task.feature.movie_list.data.repository.remote.MovieRemoteDataSourceImpl
-import com.movie_app_task.common.data.repository.remote.MoviesApiService
+import com.movie_app_task.common.domain.remote.INetworkProvider
 import com.movie_app_task.feature.movie_list.data.repository.MoviesRepositoryImpl
 import com.movie_app_task.feature.movie_list.domain.repository.MoviesRepository
 import com.movie_app_task.feature.movie_list.domain.repository.local.MovieLocalDataSource
@@ -27,9 +27,10 @@ object MovieListModule {
     @Provides
     @Singleton
     fun provideMovieRemoteDataSource(
-        apiService: MoviesApiService
-    ): MovieRemoteDataSource = MovieRemoteDataSourceImpl(apiService)
+        networkProvider: INetworkProvider
+    ): MovieRemoteDataSource = MovieRemoteDataSourceImpl(networkProvider)
     @Provides
+    @Singleton
     fun provideMoviesRepository(
         remoteDataSource: MovieRemoteDataSource,
         localDataSource: MovieLocalDataSource
