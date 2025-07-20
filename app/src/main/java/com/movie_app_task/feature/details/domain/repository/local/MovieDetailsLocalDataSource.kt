@@ -1,4 +1,4 @@
-package com.movie_app_task.feature.detiles.domain.repository.local
+package com.movie_app_task.feature.details.domain.repository.local
 
 import com.movie_app_task.feature.movie_list.data.models.entity.MovieEntity
 

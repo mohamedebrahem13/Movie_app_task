@@ -1,10 +1,10 @@
-package com.movie_app_task.feature.detiles.domain.usecase
+package com.movie_app_task.feature.details.domain.usecase
 
 import com.movie_app_task.common.domain.utils.MovieDomainException
 import com.movie_app_task.common.domain.utils.Resource
 import com.movie_app_task.common.domain.utils.UnknownException
-import com.movie_app_task.feature.detiles.domain.models.MovieDetails
-import com.movie_app_task.feature.detiles.domain.repository.MovieDetailsRepository
+import com.movie_app_task.feature.details.domain.models.MovieDetails
+import com.movie_app_task.feature.details.domain.repository.MovieDetailsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

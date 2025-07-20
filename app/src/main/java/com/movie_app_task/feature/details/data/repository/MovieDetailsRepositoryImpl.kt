@@ -1,10 +1,10 @@
-package com.movie_app_task.feature.detiles.data.repository
+package com.movie_app_task.feature.details.data.repository
 
 import com.movie_app_task.common.domain.utils.safeCall
-import com.movie_app_task.feature.detiles.data.mapper.MovieDetailsMapper
-import com.movie_app_task.feature.detiles.domain.models.MovieDetails
-import com.movie_app_task.feature.detiles.domain.repository.MovieDetailsRepository
-import com.movie_app_task.feature.detiles.domain.repository.local.MovieDetailsLocalDataSource
+import com.movie_app_task.feature.details.data.mapper.MovieDetailsMapper
+import com.movie_app_task.feature.details.domain.models.MovieDetails
+import com.movie_app_task.feature.details.domain.repository.MovieDetailsRepository
+import com.movie_app_task.feature.details.domain.repository.local.MovieDetailsLocalDataSource
 
 class MovieDetailsRepositoryImpl(
     private val localDataSource: MovieDetailsLocalDataSource

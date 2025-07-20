@@ -1,7 +1,7 @@
-package com.movie_app_task.feature.detiles.ui.viewmodel
+package com.movie_app_task.feature.details.ui.viewmodel
 
 import com.movie_app_task.common.domain.utils.MovieDomainException
-import com.movie_app_task.feature.detiles.domain.models.MovieDetails
+import com.movie_app_task.feature.details.domain.models.MovieDetails
 
 interface MovieDetailsContract {
 

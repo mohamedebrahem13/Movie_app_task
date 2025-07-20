@@ -1,4 +1,4 @@
-package com.movie_app_task.feature.detiles.domain.models
+package com.movie_app_task.feature.details.domain.models
 
 data class MovieDetails(
     val id: Int,

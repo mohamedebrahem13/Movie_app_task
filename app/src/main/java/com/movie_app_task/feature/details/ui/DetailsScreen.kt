@@ -1,4 +1,4 @@
-package com.movie_app_task.feature.detiles.ui
+package com.movie_app_task.feature.details.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -12,9 +12,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.movie_app_task.R
-import com.movie_app_task.feature.detiles.ui.composable.MovieDetailsContent
-import com.movie_app_task.feature.detiles.ui.viewmodel.MovieDetailsContract.*
-import com.movie_app_task.feature.detiles.ui.viewmodel.MovieDetailsViewModel
+import com.movie_app_task.feature.details.ui.composable.MovieDetailsContent
+import com.movie_app_task.feature.details.ui.viewmodel.MovieDetailsContract.*
+import com.movie_app_task.feature.details.ui.viewmodel.MovieDetailsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
