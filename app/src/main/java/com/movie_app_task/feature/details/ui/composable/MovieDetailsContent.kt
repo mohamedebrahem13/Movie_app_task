@@ -1,4 +1,4 @@
-package com.movie_app_task.feature.detiles.ui.composable
+package com.movie_app_task.feature.details.ui.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.movie_app_task.R
-import com.movie_app_task.feature.detiles.domain.models.MovieDetails
+import com.movie_app_task.feature.details.domain.models.MovieDetails
 import com.movie_app_task.feature.movie_list.ui.screen.home.composable.Rating
 
 @Composable

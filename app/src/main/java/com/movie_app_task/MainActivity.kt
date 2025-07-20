@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.movie_app_task.feature.detiles.ui.DetailsScreen
+import com.movie_app_task.feature.details.ui.DetailsScreen
 import com.movie_app_task.feature.movie_list.ui.screen.home.HomeScreen
 import com.movie_app_task.android.theme.MovieAppTaskTheme
 import dagger.hilt.android.AndroidEntryPoint

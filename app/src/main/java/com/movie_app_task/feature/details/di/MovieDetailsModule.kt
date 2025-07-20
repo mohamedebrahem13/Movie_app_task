@@ -1,18 +1,18 @@
-package com.movie_app_task.feature.detiles.di
+package com.movie_app_task.feature.details.di
 
 import com.movie_app_task.common.data.repository.local.db.MovieDao
-import com.movie_app_task.feature.detiles.data.repository.MovieDetailsRepositoryImpl
-import com.movie_app_task.feature.detiles.data.repository.local.MovieDetailsLocalDataSourceImpl
-import com.movie_app_task.feature.detiles.domain.repository.MovieDetailsRepository
-import com.movie_app_task.feature.detiles.domain.repository.local.MovieDetailsLocalDataSource
-import com.movie_app_task.feature.detiles.domain.usecase.GetMovieDetailsByIdUseCase
+import com.movie_app_task.feature.details.data.repository.MovieDetailsRepositoryImpl
+import com.movie_app_task.feature.details.data.repository.local.MovieDetailsLocalDataSourceImpl
+import com.movie_app_task.feature.details.domain.repository.MovieDetailsRepository
+import com.movie_app_task.feature.details.domain.repository.local.MovieDetailsLocalDataSource
+import com.movie_app_task.feature.details.domain.usecase.GetMovieDetailsByIdUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object MovieDetailsModule {
     @Provides
     fun provideMovieDetailsLocalDataSource(

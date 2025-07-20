@@ -1,10 +1,10 @@
-package com.movie_app_task.feature.detiles.ui.viewmodel
+package com.movie_app_task.feature.details.ui.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.movie_app_task.common.domain.utils.Resource
 import com.movie_app_task.common.ui.BaseMovieViewModel
-import com.movie_app_task.feature.detiles.domain.usecase.GetMovieDetailsByIdUseCase
-import com.movie_app_task.feature.detiles.ui.viewmodel.MovieDetailsContract.*
+import com.movie_app_task.feature.details.domain.usecase.GetMovieDetailsByIdUseCase
+import com.movie_app_task.feature.details.ui.viewmodel.MovieDetailsContract.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

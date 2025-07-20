@@ -1,6 +1,6 @@
-package com.movie_app_task.feature.detiles.data.mapper
+package com.movie_app_task.feature.details.data.mapper
 
-import com.movie_app_task.feature.detiles.domain.models.MovieDetails
+import com.movie_app_task.feature.details.domain.models.MovieDetails
 import com.movie_app_task.feature.movie_list.data.models.entity.MovieEntity
 
 object MovieDetailsMapper {

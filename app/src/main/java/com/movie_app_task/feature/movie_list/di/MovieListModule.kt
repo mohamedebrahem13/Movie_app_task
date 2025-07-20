@@ -11,26 +11,22 @@ import com.movie_app_task.feature.movie_list.domain.repository.remote.MovieRemot
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object MovieListModule {
 
     @Provides
-    @Singleton
     fun provideMovieLocalDataSource(
         movieDao: MovieDao
     ): MovieLocalDataSource = MovieLocalDataSourceImpl(movieDao)
 
     @Provides
-    @Singleton
     fun provideMovieRemoteDataSource(
         networkProvider: INetworkProvider
     ): MovieRemoteDataSource = MovieRemoteDataSourceImpl(networkProvider)
     @Provides
-    @Singleton
     fun provideMoviesRepository(
         remoteDataSource: MovieRemoteDataSource,
         localDataSource: MovieLocalDataSource
