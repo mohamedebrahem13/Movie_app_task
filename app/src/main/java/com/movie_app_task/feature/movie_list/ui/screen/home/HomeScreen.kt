@@ -35,6 +35,7 @@ import com.movie_app_task.feature.movie_list.ui.screen.home.composable.HomeHeade
 import com.movie_app_task.feature.movie_list.ui.screen.home.composable.PosterItemVertically
 import com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel.MovieContract
 import com.movie_app_task.feature.movie_list.ui.screen.home.viewmodel.MovieViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HomeScreen(
@@ -87,12 +88,8 @@ fun HomeScreen(
         onDispose { voiceSearchHelper.destroy() }
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.processIntent(MovieContract.MovieAction.LoadMovies)
-    }
-
     LaunchedEffect(viewModel.singleEvent) {
-        viewModel.singleEvent.collect { event ->
+        viewModel.singleEvent.collectLatest { event ->
             when (event) {
                 is MovieContract.MovieEvent.Navigate -> {
                     onMovieClick(event.movieId, event.movieTitle)

@@ -27,12 +27,15 @@ class MovieViewModel @Inject constructor(
 ) : BaseMovieViewModel<MovieContract.MovieAction, MovieContract.MovieEvent, MovieContract.MovieState>(
     MovieContract.MovieState()
 ) {
+    init {
+        loadMovies()
+    }
     private var debounceJob: Job? = null
 
     override fun onActionTrigger(action: MovieContract.MovieAction?) {
         when (action) {
-            is MovieContract.MovieAction.LoadMovies -> loadMovies()
             is MovieContract.MovieAction.OnMovieClick -> {
+                setState(currentState.copy(searchQuery = ""))
                 sendEvent(Navigate(action.movieId, action.movieTitle))
             }
 
