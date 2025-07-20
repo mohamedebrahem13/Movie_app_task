@@ -1,4 +1,4 @@
-package com.movie_app_task.common.data.repository.remote
+package com.movie_app_task.common.data.repository.remote.adapter_factory
 
 import com.movie_app_task.common.data.repository.remote.converter.IExceptionConverter
 import okhttp3.ResponseBody

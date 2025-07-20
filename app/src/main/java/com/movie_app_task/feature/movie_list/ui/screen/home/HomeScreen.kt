@@ -94,8 +94,17 @@ fun HomeScreen(
     LaunchedEffect(viewModel.singleEvent) {
         viewModel.singleEvent.collect { event ->
             when (event) {
-                is MovieContract.MovieEvent.Navigate -> onMovieClick(event.movieId, event.movieTitle)
-                is MovieContract.MovieEvent.ShowError -> { /* Handle error if needed */ }
+                is MovieContract.MovieEvent.Navigate -> {
+                    onMovieClick(event.movieId, event.movieTitle)
+                }
+
+                is MovieContract.MovieEvent.ShowError -> {
+                    Toast.makeText(
+                        context,
+                        event.error.message ?: context.getString(R.string.unknown_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

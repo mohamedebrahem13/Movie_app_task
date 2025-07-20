@@ -4,10 +4,12 @@ import com.movie_app_task.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.movie_app_task.common.Constants
-import com.movie_app_task.common.data.repository.remote.MovieAppCallAdapterFactory
+import com.movie_app_task.common.data.repository.remote.adapter_factory.MovieAppCallAdapterFactory
 import com.movie_app_task.common.data.repository.remote.MoviesApiService
+import com.movie_app_task.common.data.repository.remote.RetrofitNetworkProvider
 import com.movie_app_task.common.data.repository.remote.converter.ExceptionConverter
 import com.movie_app_task.common.data.repository.remote.converter.IExceptionConverter
+import com.movie_app_task.common.domain.remote.INetworkProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,6 +69,7 @@ object NetworkModule {
             .addInterceptor(logging)
             .build()
     }
+
     @Provides
     @Singleton
     fun provideExceptionConverter(): IExceptionConverter {
@@ -75,19 +78,31 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideCallAdapter(exceptionConverter: IExceptionConverter): MovieAppCallAdapterFactory {
+        return MovieAppCallAdapterFactory.create(exceptionConverter)
+    }
+
+    @Provides
+    @Singleton
     fun provideRetrofit(
         gson: Gson,
         @Named("base_url") baseUrl: String,
         client: OkHttpClient,
-        exceptionConverter: IExceptionConverter
+        movieAppCallAdapterFactory: MovieAppCallAdapterFactory
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(client)
-        .addCallAdapterFactory(MovieAppCallAdapterFactory.create(exceptionConverter))
+        .addCallAdapterFactory(movieAppCallAdapterFactory)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
+
     @Provides
     @Singleton
-    fun provideMoviesApiService(retrofit: Retrofit): MoviesApiService =
+    fun provideRetrofitNetwork(apiService: MoviesApiService): INetworkProvider {
+        return RetrofitNetworkProvider(apiService)
+    }
+    @Provides
+    @Singleton
+    fun providesMoviesApiService(retrofit: Retrofit): MoviesApiService =
         retrofit.create(MoviesApiService::class.java)
 }

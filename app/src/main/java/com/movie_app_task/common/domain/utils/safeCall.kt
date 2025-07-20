@@ -20,17 +20,17 @@ suspend fun <T> safeCall(block: suspend () -> T): T {
 
 fun mapToDomainException(e: Throwable): MovieDomainException {
     return when (e) {
-        is NetworkRetrialException -> NetworkException(e.message)
-        is NetworkUnhandledException -> UnknownException(e.message)
-        is InternalServerErrorException -> ServerErrorException(e.message)
+        is NetworkRetrialException -> NetworkException("Network issue occurred. Please try again.")
+        is NetworkUnhandledException -> UnknownException("Unexpected network error.")
+        is InternalServerErrorException -> ServerErrorException("Something went wrong on the server.")
+
         is ClientUnhandledException,
-        is IllegalArgumentExceptionCustom -> DataReadWriteException(e.message)
+        is IllegalArgumentExceptionCustom -> DataReadWriteException("Invalid data encountered.")
 
-        is UnauthorizedException -> UserNotAuthenticatedException(e.message)
+        is UnauthorizedException -> UserNotAuthenticatedException("You are not authorized. Please login again.")
         is IOErrorException,
-        is DatabaseCorruptionException -> DataReadWriteException(e.message)
+        is DatabaseCorruptionException -> DataReadWriteException("Problem reading from storage.")
 
-        else -> UnknownException(e.message)
+        else -> UnknownException("An unknown error occurred.")
     }
-
 }
