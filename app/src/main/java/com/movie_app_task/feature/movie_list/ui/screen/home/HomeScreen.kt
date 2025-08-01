@@ -40,7 +40,7 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun HomeScreen(
     viewModel: MovieViewModel = hiltViewModel(),
-    onMovieClick: (Int,String) -> Unit
+    onMovieClick: (Int, String) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -120,11 +120,12 @@ fun HomeScreen(
         onVoiceClick = {
             viewModel.processIntent(MovieContract.MovieAction.OnVoiceSearchClick)
         },
-        onMovieClick = { movieId,movieTitle ->
-            viewModel.processIntent(MovieContract.MovieAction.OnMovieClick(movieId,movieTitle))
+        onMovieClick = { movieId, movieTitle ->
+            viewModel.processIntent(MovieContract.MovieAction.OnMovieClick(movieId, movieTitle))
         }
     )
 }
+
 @Composable
 fun HomeScreenContent(
     state: MovieContract.MovieState,
@@ -132,7 +133,7 @@ fun HomeScreenContent(
     onSearchTextChange: (String) -> Unit,
     onSearchClick: (String) -> Unit,
     onVoiceClick: () -> Unit,
-    onMovieClick: (Int,String) -> Unit,
+    onMovieClick: (Int, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -160,6 +161,7 @@ fun HomeScreenContent(
                     CircularProgressIndicator()
                 }
             }
+
             state.error != null -> {
                 Box(
                     Modifier
@@ -172,18 +174,21 @@ fun HomeScreenContent(
                     )
                 }
             }
+
             state.movies.isNotEmpty() -> {
                 MovieList(movies = state.movies, onMovieClick = onMovieClick)
             }
+
             else -> Unit
 
         }
     }
 }
+
 @Composable
 fun MovieList(
     movies: List<Movie>,
-    onMovieClick: (Int,String) -> Unit
+    onMovieClick: (Int, String) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -193,7 +198,8 @@ fun MovieList(
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(movies) { movie ->
+        items(movies, key = { it.id }
+        ) { movie ->
             PosterItemVertically(
                 movie = movie,
                 modifier = Modifier.fillMaxWidth()
